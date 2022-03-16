@@ -1,3 +1,5 @@
+from data_cleaning import word_tokenizer
+
 class Review():
     def __init__(
         self, review_id, product_id, product_parent, product_title, vine, 
@@ -19,3 +21,6 @@ class Review():
 
     def ReviewBodyCharCount(self):
         return len(self.review_body)
+
+    def ReviewBodyWordCount(self):
+        return len(word_tokenizer(self.review_body))
