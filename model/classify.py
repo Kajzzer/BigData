@@ -26,7 +26,7 @@ def main(output_dir, dataset_dir, model_dir):
 
     dataloader = create_dataloader(df, params['batch size'], label=False)
 
-    f = open(output_dir 'w')
+    f = open(output_dir, 'w')
 
     # For each batch of training data...
     for step, batch in enumerate(dataloader):
