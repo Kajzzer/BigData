@@ -1,4 +1,4 @@
-## File structure
+## Directory structure
 1. transformer.py
 2. parameters.py
 3. classify.py
