@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import torch
 import transformers as ppb
-from torch import nn
 import argparse
 import transformers as ppb
 from utils import *
@@ -27,7 +26,7 @@ def main(output_dir, dataset_dir, model_dir):
 
     dataloader = create_dataloader(df, params['batch size'], label=False)
 
-    f = open('output_dir', 'w')
+    f = open(output_dir 'w')
 
     # For each batch of training data...
     for step, batch in enumerate(dataloader):
