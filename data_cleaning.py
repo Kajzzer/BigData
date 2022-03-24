@@ -3,6 +3,7 @@
 from nltk.tokenize import wordpunct_tokenize, RegexpTokenizer, sent_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.corpus import stopwords
+import re
 
 
 def word_tokenizer(review, without_punctuation=True):
