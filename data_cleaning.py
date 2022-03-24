@@ -98,3 +98,13 @@ def remove_accent_spam(text, threshold=0.075):
 
     # return the cleaned text
     return text
+
+# this can be used to ensure that we have a space after a sentence stopper or after a comma
+def fix_sents_replacement(matchobj):
+    if matchobj.group(1) and matchobj.group(2): return matchobj.group(1) + ' ' + matchobj.group(2)
+    if matchobj.group(3) and matchobj.group(4): return matchobj.group(3) + ' ' + matchobj.group(4)
+    return matchobj.group(0)
+
+# fix the sentence ends for the nltk sent tokenizer
+def fix_sents(text):
+    return re.sub("([.?!,])([A-Z])|(,)([a-z])", fix_sents_replacement, text)
