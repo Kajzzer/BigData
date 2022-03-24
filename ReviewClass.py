@@ -41,8 +41,29 @@ class Review():
         return len(word_tokenizer(self.review_body))
 
     def TaggedReviewBody(self):
-        if not hasattr(self, 'model'):
-            self.SelectLanguageModel()
+        if self.marketplace_id == 2:
+            model = Review.fr_core_news_sm
+        elif self.marketplace_id == 3:
+            model = Review.de_core_news_sm
+        else:
+            model = Review.en_core_web_sm
+            
+        sentence = model(self.review_body)
 
-        sentence = self.model(self.review_body)
-        return [{'text': word.text, 'pos': word.pos_, 'tag': word.tag_} for word in sentence]
+        length = self.ReviewBodyWordCount()
+
+        if length > 1:
+
+            self.pos_verb_ratio = sum(word.pos_ == "VERB" for word in sentence) / length
+            self.pos_propn_ratio = sum(word.pos_ == "PROPN" for word in sentence) / length
+            self.pos_aux_ratio = sum(word.pos_ == "AUX" for word in sentence) / length
+            self.pos_adp_ratio = sum(word.pos_ == "ADP" for word in sentence) / length
+            self.pos_noun_ratio = sum(word.pos_ == "NOUN" for word in sentence) / length
+            self.pos_num_ratio = sum(word.pos_ == "NUM" for word in sentence) / length
+        else:
+            self.pos_verb_ratio = 0
+            self.pos_propn_ratio = 0
+            self.pos_aux_ratio = 0
+            self.pos_adp_ratio = 0
+            self.pos_noun_ratio = 0
+            self.pos_num_ratio = 0
